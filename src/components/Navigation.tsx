@@ -1,27 +1,32 @@
-import { AppShellHeader, Group, Title } from "@mantine/core";
+import { AppShellHeader, Group, Text, ActionIcon, Button } from "@mantine/core";
 import { NavLink } from "react-router-dom";
 import {
   IconMovie,
   IconDeviceTvOld,
   IconDeviceGamepad2,
   IconBook,
+  IconPlus,
 } from "@tabler/icons-react";
 import React from "react";
+import Logo from "./Logo";
 
 interface NavigationProps {
   isMobile: boolean;
+  onAddClick: () => void;
 }
 
 function NavItem({ to, label }: { to: string; label: string }) {
   return (
-    <NavLink
-      to={to}
-      style={({ isActive }) => ({
-        fontWeight: isActive ? "bold" : "normal",
-        color: isActive ? "white" : "gray",
-      })}
-    >
-      {label}
+    <NavLink to={to}>
+      {({ isActive }) => (
+        <Button
+          variant={isActive ? "filled" : "subtle"}
+          color="#FF6B6B"
+          size="sm"
+        >
+          {label}
+        </Button>
+      )}
     </NavLink>
   );
 }
@@ -32,6 +37,7 @@ function NavIconItem({ to, icon }: { to: string; icon: React.ReactNode }) {
       to={to}
       style={({ isActive }) => ({
         color: isActive ? "#FF6B6B" : "gray",
+        padding: "10px",
       })}
     >
       {icon}
@@ -39,7 +45,7 @@ function NavIconItem({ to, icon }: { to: string; icon: React.ReactNode }) {
   );
 }
 
-export default function Navigation({ isMobile }: NavigationProps) {
+export default function Navigation({ isMobile, onAddClick }: NavigationProps) {
   return isMobile ? (
     <div
       style={{
@@ -56,13 +62,22 @@ export default function Navigation({ isMobile }: NavigationProps) {
       }}
     >
       <Group justify="center" h="100%">
-        <NavIconItem to="/movies" icon={<IconMovie size={44} stroke={2} />} />
-        <NavIconItem to="/tv" icon={<IconDeviceTvOld size={44} stroke={2} />} />
+        <NavIconItem to="/movies" icon={<IconMovie size={28} stroke={2} />} />
+        <NavIconItem to="/tv" icon={<IconDeviceTvOld size={28} stroke={2} />} />
+        <ActionIcon
+          onClick={onAddClick}
+          variant="filled"
+          color="#FF6B6B"
+          size="xl"
+          radius="xl"
+        >
+          <IconPlus size={24} />
+        </ActionIcon>
         <NavIconItem
           to="/games"
-          icon={<IconDeviceGamepad2 size={44} stroke={2} />}
+          icon={<IconDeviceGamepad2 size={28} stroke={2} />}
         />
-        <NavIconItem to="/books" icon={<IconBook size={44} stroke={2} />} />
+        <NavIconItem to="/books" icon={<IconBook size={28} stroke={2} />} />
       </Group>
     </div>
   ) : (
@@ -76,14 +91,29 @@ export default function Navigation({ isMobile }: NavigationProps) {
           padding: "0 16px",
         }}
       >
-        <Title>MyPile</Title>
+        <Group align="center" gap="xs">
+          <Logo size="sm" />
+          <Text fw={700} size="xl">
+            My<span style={{ color: "#FF6B6B" }}>Pile</span>
+          </Text>
+        </Group>
         <Group>
           <NavItem to="/movies" label="Movies" />
           <NavItem to="/tv" label="TV" />
           <NavItem to="/games" label="Games" />
           <NavItem to="/books" label="Books" />
         </Group>
-        <div />
+        <Group justify="flex-end">
+          <ActionIcon
+            onClick={onAddClick}
+            variant="filled"
+            color="#FF6B6B"
+            size="lg"
+            radius="xl"
+          >
+            <IconPlus size={18} />
+          </ActionIcon>
+        </Group>
       </div>
     </AppShellHeader>
   );
