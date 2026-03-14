@@ -1,62 +1,49 @@
-import MovieCard from "./components/MovieCard";
-import { useState, useEffect } from "react";
-import type { TMDBMovie } from "./types/tmdb";
-import type { Movie } from "./types/movie";
-import { Container, SimpleGrid, TextInput, Title } from "@mantine/core";
+import {
+  AppShell,
+  AppShellHeader,
+  AppShellMain,
+  Group,
+  Title,
+} from "@mantine/core";
+import { Routes, Route, Link } from "react-router-dom";
+import MoviesPage from "./pages/MoviesPage";
+import TVPage from "./pages/TVPage";
+import GamesPage from "./pages/GamesPage";
+import BooksPage from "./pages/BooksPage";
 
 export default function App() {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  useEffect(() => {
-    const url = searchQuery
-      ? `https://api.themoviedb.org/3/search/multi?api_key=${import.meta.env.VITE_TMDB_API_KEY}&query=${searchQuery}`
-      : `https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_TMDB_API_KEY}`;
-
-    const timeout = setTimeout(() => {
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) =>
-          setMovies(
-            data.results.map((movie: TMDBMovie) => ({
-              id: movie.id,
-              title: movie.title,
-              releaseDate: movie.release_date,
-              genre: movie.genre_ids[0],
-              titleImage: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-            })),
-          ),
-        );
-    }, 500);
-
-    return () => clearTimeout(timeout);
-  }, [searchQuery]);
-
   return (
-    <>
-      <Container>
-        <Title>MyPile</Title>
-        <TextInput
-          placeholder="Search... "
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <SimpleGrid
-          cols={{ base: 1, sm: 2, lg: 5 }}
-          spacing={{ base: 10, sm: "xl" }}
-          verticalSpacing={{ base: "md", sm: "xl" }}
+    <AppShell header={{ height: 60 }}>
+      <AppShellHeader>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr auto 1fr",
+            alignItems: "center",
+            height: "100%",
+            padding: "0 16px",
+          }}
         >
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              title={movie.title}
-              releaseDate={movie.releaseDate}
-              genre={movie.genre}
-              titleImage={movie.titleImage}
-            />
-          ))}
-        </SimpleGrid>
-      </Container>
-    </>
+          <Title>MyPile</Title>
+          <Group>
+            <Link to="/movies">Movies</Link>
+            <Link to="/tv">TV</Link>
+            <Link to="/games">Games</Link>
+            <Link to="/books">Books</Link>
+          </Group>
+          <div />
+        </div>
+      </AppShellHeader>
+
+      <AppShellMain>
+        <Routes>
+          <Route path="/" element={<MoviesPage />} />
+          <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/tv" element={<TVPage />} />
+          <Route path="/games" element={<GamesPage />} />
+          <Route path="/books" element={<BooksPage />} />
+        </Routes>
+      </AppShellMain>
+    </AppShell>
   );
 }

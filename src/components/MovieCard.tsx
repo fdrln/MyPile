@@ -15,7 +15,7 @@ export default function MovieCard({
 }: MovieCardProps) {
   return (
     <Card withBorder radius="md">
-      <Image src={titleImage} alt={title} />
+      <Image src={titleImage} alt={title} height={300} />
       <Text>{title}</Text>
       <Badge>{releaseDate}</Badge>
       <Badge>{genre}</Badge>
