@@ -9,7 +9,26 @@ import { BrowserRouter } from "react-router-dom";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <MantineProvider>
+      <MantineProvider
+        defaultColorScheme="dark"
+        theme={{
+          primaryColor: "brand",
+          colors: {
+            brand: [
+              "#FFE8E8",
+              "#FFCFCF",
+              "#FFB5B5",
+              "#FF9C9C",
+              "#FF8383",
+              "#FF6B6B",
+              "#E55F5F",
+              "#CC5454",
+              "#B24848",
+              "#993D3D",
+            ],
+          },
+        }}
+      >
         <App />
       </MantineProvider>
     </BrowserRouter>

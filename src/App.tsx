@@ -11,10 +11,7 @@ export default function App() {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <AppShell
-      header={!isMobile ? { height: 60 } : undefined}
-      footer={isMobile ? { height: 60 } : undefined}
-    >
+    <AppShell header={!isMobile ? { height: 60 } : undefined}>
       <Navigation isMobile={isMobile ?? false} />
       <AppShellMain>
         <Routes>
