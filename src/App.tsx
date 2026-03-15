@@ -1,6 +1,5 @@
 import { AppShell, AppShellMain } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
-import { useDisclosure } from "@mantine/hooks";
+import { useMediaQuery, useDisclosure } from "@mantine/hooks";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import AddModal from "./components/AddModal";

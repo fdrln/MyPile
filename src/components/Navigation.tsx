@@ -7,8 +7,8 @@ import {
   IconBook,
   IconPlus,
 } from "@tabler/icons-react";
-import React from "react";
 import Logo from "./Logo";
+import { ACCENT_COLOR } from "../constants/theme";
 
 interface NavigationProps {
   isMobile: boolean;
@@ -21,7 +21,7 @@ function NavItem({ to, label }: { to: string; label: string }) {
       {({ isActive }) => (
         <Button
           variant={isActive ? "filled" : "subtle"}
-          color="#FF6B6B"
+          color={ACCENT_COLOR}
           size="sm"
         >
           {label}
@@ -36,7 +36,7 @@ function NavIconItem({ to, icon }: { to: string; icon: React.ReactNode }) {
     <NavLink
       to={to}
       style={({ isActive }) => ({
-        color: isActive ? "#FF6B6B" : "gray",
+        color: isActive ? ACCENT_COLOR : "gray",
         padding: "10px",
       })}
     >
@@ -67,7 +67,7 @@ export default function Navigation({ isMobile, onAddClick }: NavigationProps) {
         <ActionIcon
           onClick={onAddClick}
           variant="filled"
-          color="#FF6B6B"
+          color={ACCENT_COLOR}
           size="xl"
           radius="xl"
         >
@@ -100,19 +100,18 @@ export default function Navigation({ isMobile, onAddClick }: NavigationProps) {
         <Group>
           <NavItem to="/movies" label="Movies" />
           <NavItem to="/tv" label="TV" />
-          <NavItem to="/games" label="Games" />
-          <NavItem to="/books" label="Books" />
-        </Group>
-        <Group justify="flex-end">
-          <ActionIcon
+          <Button
             onClick={onAddClick}
             variant="filled"
-            color="#FF6B6B"
+            color={ACCENT_COLOR}
             size="lg"
             radius="xl"
+            leftSection={<IconPlus size={18} />}
           >
-            <IconPlus size={18} />
-          </ActionIcon>
+            Add to pile
+          </Button>
+          <NavItem to="/games" label="Games" />
+          <NavItem to="/books" label="Books" />
         </Group>
       </div>
     </AppShellHeader>
