@@ -13,6 +13,7 @@ import { useState } from "react";
 import { ACCENT_COLOR } from "../constants/theme";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { useMediaSearch } from "../hooks/useMediaSearch";
+import MovieCard from "./MovieCard";
 
 interface AddModalProps {
   opened: boolean;
@@ -37,6 +38,7 @@ export default function AddModal({ opened, onClose }: AddModalProps) {
       opened={opened}
       onClose={handleClose}
       centered
+      size="auto"
       title={
         selectedCategory === null
           ? "Add to Pile"
@@ -79,11 +81,20 @@ export default function AddModal({ opened, onClose }: AddModalProps) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <Stack>
+          <SimpleGrid cols={{ base: 1, sm: 2, lg: 5 }}>
             {results.map((result) => (
-              <Text key={result.id}>{result.title}</Text>
+              <MovieCard
+                key={result.id}
+                title={result.title}
+                titleImage={result.titleImage}
+                releaseDate={result.releaseDate}
+                genre={result.genre}
+                rating={result.rating}
+                overview={result.overview}
+                onAdd={() => {}}
+              />
             ))}
-          </Stack>
+          </SimpleGrid>
         </Stack>
       )}
     </Modal>

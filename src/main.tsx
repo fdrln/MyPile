@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { BrowserRouter } from "react-router-dom";
+import { GenreProvider } from "./context/GenreContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -29,7 +30,9 @@ createRoot(document.getElementById("root")!).render(
           },
         }}
       >
-        <App />
+        <GenreProvider>
+          <App />
+        </GenreProvider>
       </MantineProvider>
     </BrowserRouter>
   </StrictMode>,

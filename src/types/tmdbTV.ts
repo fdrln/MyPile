@@ -1,7 +1,7 @@
-export interface TMDBMovie {
+export interface TMDBTVShow {
   id: number;
-  title: string;
-  release_date: string;
+  name: string;
+  first_air_date: string;
   overview: string;
   vote_average: number;
   genre_ids: number[];
