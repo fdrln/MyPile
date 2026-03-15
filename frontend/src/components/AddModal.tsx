@@ -14,18 +14,39 @@ import { ACCENT_COLOR } from "../constants/theme";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { useMediaSearch } from "../hooks/useMediaSearch";
 import MovieCard from "./MovieCard";
+import { addMovie, type MoviePileItem } from "../services/pileService";
+import type { Movie } from "../types/movie";
 
 interface AddModalProps {
   opened: boolean;
   onClose: () => void;
+  onItemAdded: () => void;
 }
 
-export default function AddModal({ opened, onClose }: AddModalProps) {
+export default function AddModal({
+  opened,
+  onClose,
+  onItemAdded,
+}: AddModalProps) {
   const [selectedCategory, setSelectedCategory] = useState<CategoryId | null>(
     null,
   );
   const [searchQuery, setSearchQuery] = useState("");
   const { results } = useMediaSearch(selectedCategory, searchQuery);
+
+  const handleAdd = async (result: Movie) => {
+    const item: MoviePileItem = {
+      externalId: result.id,
+      title: result.title,
+      imageUrl: result.titleImage,
+      genre: result.genre,
+      rating: result.rating,
+      overview: result.overview,
+      releaseDate: result.releaseDate,
+    };
+    await addMovie(item);
+    onItemAdded();
+  };
 
   const handleClose = () => {
     setSelectedCategory(null);
@@ -91,7 +112,7 @@ export default function AddModal({ opened, onClose }: AddModalProps) {
                 genre={result.genre}
                 rating={result.rating}
                 overview={result.overview}
-                onAdd={() => {}}
+                onAdd={() => handleAdd(result)}
               />
             ))}
           </SimpleGrid>

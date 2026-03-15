@@ -17,11 +17,11 @@ export function GenreProvider({ children }: { children: React.ReactNode }) {
     ]).then(([movieGenres, tvGenres]) => {
       const allGenres = [...movieGenres.genres, ...tvGenres.genres];
       const genreMap = allGenres.reduce(
-        (acc, genre) => {
+        (acc: Record<number, string>, genre: { id: number; name: string }) => {
           acc[genre.id] = genre.name;
           return acc;
         },
-        {} as Record<number, string>,
+        {},
       );
       setGenres(genreMap);
     });
