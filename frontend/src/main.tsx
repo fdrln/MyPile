@@ -6,6 +6,8 @@ import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { BrowserRouter } from "react-router-dom";
 import { GenreProvider } from "./context/GenreContext.tsx";
+import "@mantine/notifications/styles.css";
+import { Notifications } from "@mantine/notifications";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -41,6 +43,7 @@ createRoot(document.getElementById("root")!).render(
         }}
       >
         <GenreProvider>
+          <Notifications />
           <App />
         </GenreProvider>
       </MantineProvider>

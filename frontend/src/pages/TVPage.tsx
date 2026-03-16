@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Title, Stack, SimpleGrid, Text } from "@mantine/core";
-import { getItems, type TVPileItem } from "../services/pileService";
+import { getItems, deleteItem, type TVPileItem } from "../services/pileService";
 import MovieCard from "../components/MovieCard";
+import { notifications } from "@mantine/notifications";
 
 interface TVPageProps {
   refreshPile: number;
@@ -53,7 +54,17 @@ export default function TVPage({ refreshPile }: TVPageProps) {
               genre={item.genre}
               rating={item.rating}
               overview={item.overview}
-              onAdd={() => {}}
+              buttonLabel="Remove from pile"
+              onAdd={() =>
+                deleteItem("tv", item.id!).then(() => {
+                  getItems("tv").then(setPile);
+                  notifications.show({
+                    title: "Removed from pile",
+                    message: `${item.title} was removed`,
+                    color: "gray",
+                  });
+                })
+              }
             />
           ))}
         </SimpleGrid>

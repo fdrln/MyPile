@@ -6,6 +6,7 @@ import {
   type MoviePileItem,
 } from "../services/pileService";
 import MovieCard from "../components/MovieCard";
+import { notifications } from "@mantine/notifications";
 
 interface MoviesPageProps {
   refreshPile: number;
@@ -59,9 +60,14 @@ export default function MoviesPage({ refreshPile }: MoviesPageProps) {
               overview={item.overview}
               buttonLabel="Remove from pile"
               onAdd={() =>
-                deleteItem("movies", item.id!).then(() =>
-                  getItems("movies").then(setPile),
-                )
+                deleteItem("movies", item.id!).then(() => {
+                  getItems("movies").then(setPile);
+                  notifications.show({
+                    title: "Removed from pile",
+                    message: `${item.title} was removed`,
+                    color: "gray",
+                  });
+                })
               }
             />
           ))}

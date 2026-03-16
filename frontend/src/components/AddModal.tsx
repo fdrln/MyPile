@@ -17,6 +17,7 @@ import { useMediaSearch } from "../hooks/useMediaSearch";
 import MovieCard from "./MovieCard";
 import { addItem } from "../services/pileService";
 import type { MediaSearchResult } from "../types/MediaSearchResult";
+import { notifications } from "@mantine/notifications";
 
 interface AddModalProps {
   opened: boolean;
@@ -53,6 +54,11 @@ export default function AddModal({
       await addItem(selectedCategory, item);
     }
     onItemAdded();
+    notifications.show({
+      title: "Added to pile!",
+      message: `${result.title} was added to your pile`,
+      color: ACCENT_COLOR,
+    });
   };
 
   const handleClose = () => {
