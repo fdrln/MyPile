@@ -1,4 +1,4 @@
-export interface Movie {
+export interface MediaSearchResult {
   id: number;
   title: string;
   releaseDate: string;

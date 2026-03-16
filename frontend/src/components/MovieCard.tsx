@@ -42,7 +42,7 @@ export default function MovieCard({
           {genres[genre] ?? "Unknown"}
         </Badge>
       </Group>
-      <Text size="xs" c="dimmed" lineClamp={2} style={{ flex: 1 }}>
+      <Text size="xs" c="dimmed" lineClamp={4} style={{ flex: 1 }}>
         {overview ?? "No overview available."}
       </Text>
     </BaseCard>

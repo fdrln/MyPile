@@ -11,7 +11,7 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <MantineProvider
-        defaultColorScheme="dark"
+        defaultColorScheme="auto"
         theme={{
           primaryColor: "brand",
           colors: {
@@ -21,12 +21,22 @@ createRoot(document.getElementById("root")!).render(
               "#FFB5B5",
               "#FF9C9C",
               "#FF8383",
-              "#FF6B6B",
-              "#E55F5F",
-              "#CC5454",
-              "#B24848",
-              "#993D3D",
+              "#E8634A",
+              "#CC5540",
+              "#B24737",
+              "#99392D",
+              "#802B22",
             ],
+          },
+          fontFamily: "'Inter', sans-serif",
+          headings: {
+            fontFamily: "'Lora', serif",
+            fontWeight: "700",
+          },
+          radius: {
+            md: "12px",
+            lg: "16px",
+            xl: "24px",
           },
         }}
       >

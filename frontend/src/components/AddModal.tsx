@@ -7,6 +7,7 @@ import {
   TextInput,
   ActionIcon,
   Group,
+  Divider,
 } from "@mantine/core";
 import { CATEGORIES, type CategoryId } from "../constants/categories";
 import { useState } from "react";
@@ -14,8 +15,8 @@ import { ACCENT_COLOR } from "../constants/theme";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { useMediaSearch } from "../hooks/useMediaSearch";
 import MovieCard from "./MovieCard";
-import { addMovie, type MoviePileItem } from "../services/pileService";
-import type { Movie } from "../types/movie";
+import { addItem } from "../services/pileService";
+import type { MediaSearchResult } from "../types/MediaSearchResult";
 
 interface AddModalProps {
   opened: boolean;
@@ -34,17 +35,23 @@ export default function AddModal({
   const [searchQuery, setSearchQuery] = useState("");
   const { results } = useMediaSearch(selectedCategory, searchQuery);
 
-  const handleAdd = async (result: Movie) => {
-    const item: MoviePileItem = {
+  const handleAdd = async (result: MediaSearchResult) => {
+    const baseItem = {
       externalId: result.id,
       title: result.title,
       imageUrl: result.titleImage,
       genre: result.genre,
       rating: result.rating,
       overview: result.overview,
-      releaseDate: result.releaseDate,
     };
-    await addMovie(item);
+
+    const item =
+      selectedCategory === "tv"
+        ? { ...baseItem, firstAirDate: result.releaseDate }
+        : { ...baseItem, releaseDate: result.releaseDate };
+    if (selectedCategory !== null) {
+      await addItem(selectedCategory, item);
+    }
     onItemAdded();
   };
 
@@ -101,6 +108,11 @@ export default function AddModal({
             placeholder="Search..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <Divider
+            label={searchQuery ? "Results" : "Trending this week"}
+            labelPosition="left"
+            mt="s"
           />
           <SimpleGrid cols={{ base: 1, sm: 2, lg: 5 }}>
             {results.map((result) => (

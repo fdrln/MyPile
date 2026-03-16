@@ -1,6 +1,6 @@
-const API_BASE = "http://localhost:8080/api";
+const API_BASE = "http://localhost:8080/api/pile";
 
-export interface MoviePileItem {
+export interface PileItem {
   id?: number;
   externalId: number;
   title: string;
@@ -8,26 +8,33 @@ export interface MoviePileItem {
   genre: number;
   rating?: number;
   overview: string;
-  releaseDate: string;
   addedAt?: string;
 }
 
-export async function getMovies() {
-  const res = await fetch(`${API_BASE}/movies`);
+export interface MoviePileItem extends PileItem {
+  releaseDate: string;
+}
+
+export interface TVPileItem extends PileItem {
+  firstAirDate: string;
+}
+
+export async function getItems(category: string) {
+  const res = await fetch(`${API_BASE}/${category}`);
   return await res.json();
 }
 
-export async function addMovie(movie: MoviePileItem) {
-  const res = await fetch(`${API_BASE}/movies`, {
+export async function addItem(category: string, item: PileItem) {
+  const res = await fetch(`${API_BASE}/${category}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(movie),
+    body: JSON.stringify(item), // ← serialize the item, not category
   });
   return await res.json();
 }
 
-export async function deleteMovie(id: number) {
-  await fetch(`${API_BASE}/movies/${id}`, {
+export async function deleteItem(category: string, id: number) {
+  await fetch(`${API_BASE}/${category}/${id}`, {
     method: "DELETE",
   });
 }

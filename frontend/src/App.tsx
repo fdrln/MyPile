@@ -29,7 +29,8 @@ export default function App() {
             path="/movies"
             element={<MoviesPage refreshPile={refreshPile} />}
           />
-          <Route path="/tv" element={<TVPage />} />
+          <Route path="/tv" element={<TVPage refreshPile={refreshPile} />} />
+
           <Route path="/games" element={<GamesPage />} />
           <Route path="/books" element={<BooksPage />} />
         </Routes>

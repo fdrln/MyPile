@@ -1,1 +1,1 @@
-export const ACCENT_COLOR = "#FF6B6B";
+export const ACCENT_COLOR = "#E8634A";
