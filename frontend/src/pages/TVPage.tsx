@@ -40,7 +40,7 @@ export default function TVPage({ refreshPile }: TVPageProps) {
       </div>
       {pile.length === 0 ? (
         <Text c="dimmed" size="sm">
-          Nothing here yet — hit the + button to add your first TV show.
+          Nothing here yet - hit the + button to add your first TV show.
         </Text>
       ) : (
         <SimpleGrid cols={{ base: 3, sm: 4, lg: 6, xl: 8 }} spacing="lg">

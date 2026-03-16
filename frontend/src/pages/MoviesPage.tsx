@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { Title, Stack, SimpleGrid, Text } from "@mantine/core";
-import { getItems, type MoviePileItem } from "../services/pileService";
+import {
+  getItems,
+  deleteItem,
+  type MoviePileItem,
+} from "../services/pileService";
 import MovieCard from "../components/MovieCard";
 
 interface MoviesPageProps {
@@ -40,7 +44,7 @@ export default function MoviesPage({ refreshPile }: MoviesPageProps) {
       </div>
       {pile.length === 0 ? (
         <Text c="dimmed" size="sm">
-          Nothing here yet — hit the + button to add your first movie.
+          Nothing here yet - hit the + button to add your first movie.
         </Text>
       ) : (
         <SimpleGrid cols={{ base: 3, sm: 4, lg: 6, xl: 8 }} spacing="lg">
@@ -53,7 +57,12 @@ export default function MoviesPage({ refreshPile }: MoviesPageProps) {
               genre={item.genre}
               rating={item.rating}
               overview={item.overview}
-              onAdd={() => {}}
+              buttonLabel="Remove from pile"
+              onAdd={() =>
+                deleteItem("movies", item.id!).then(() =>
+                  getItems("movies").then(setPile),
+                )
+              }
             />
           ))}
         </SimpleGrid>

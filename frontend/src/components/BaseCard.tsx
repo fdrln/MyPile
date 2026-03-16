@@ -6,6 +6,7 @@ interface BaseCardProps {
   titleImage: string;
   onAdd: () => void;
   children: React.ReactNode;
+  buttonLabel?: string;
 }
 
 export default function BaseCard({
@@ -13,6 +14,7 @@ export default function BaseCard({
   titleImage,
   onAdd,
   children,
+  buttonLabel = "+ Add to pile",
 }: BaseCardProps) {
   return (
     <Card
@@ -70,7 +72,7 @@ export default function BaseCard({
           onClick={onAdd}
           style={{ fontWeight: 500 }}
         >
-          + Add to pile
+          {buttonLabel}
         </Button>
       </div>
     </Card>

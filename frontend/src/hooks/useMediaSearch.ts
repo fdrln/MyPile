@@ -2,7 +2,7 @@ import type { CategoryId } from "../constants/categories";
 import { useState, useEffect } from "react";
 import { TMDB_BASE, TMDB_KEY, TMDB_IMG_BASE } from "../constants/api";
 import type { MediaSearchResult } from "../types/MediaSearchResult";
-import type { TMDBMovie } from "../types/tmdb";
+import type { TMDBMovie } from "../types/tmdbMovie";
 import type { TMDBTVShow } from "../types/tmdbTV";
 
 export function useMediaSearch(

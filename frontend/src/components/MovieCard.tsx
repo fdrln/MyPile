@@ -11,6 +11,7 @@ interface MovieCardProps {
   rating?: number;
   overview: string;
   onAdd: () => void;
+  buttonLabel?: string;
 }
 
 export default function MovieCard({
@@ -20,12 +21,18 @@ export default function MovieCard({
   genre,
   rating,
   overview,
+  buttonLabel,
   onAdd,
 }: MovieCardProps) {
   const genres = useGenres();
 
   return (
-    <BaseCard title={title} titleImage={titleImage} onAdd={onAdd}>
+    <BaseCard
+      title={title}
+      titleImage={titleImage}
+      onAdd={onAdd}
+      buttonLabel={buttonLabel}
+    >
       <Group justify="space-between" align="center">
         <Text fw={500} size="sm" truncate="end" style={{ flex: 1 }}>
           {title}
