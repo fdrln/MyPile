@@ -1,9 +1,8 @@
 import { Badge, Group, Text } from "@mantine/core";
 import { ACCENT_COLOR } from "../constants/theme";
-import { useGenres } from "../context/GenreContext";
 import BaseCard from "./BaseCard";
 
-interface MovieCardProps {
+interface GameCardProps {
   title: string;
   titleImage: string;
   releaseDate: string;
@@ -14,24 +13,24 @@ interface MovieCardProps {
   buttonLabel?: string;
 }
 
-export default function MovieCard({
+export default function GameCard({
   title,
   titleImage,
   releaseDate,
   genre,
   rating,
   overview,
-  buttonLabel,
   onAdd,
-}: MovieCardProps) {
-  const genres = useGenres();
-
+  buttonLabel,
+}: GameCardProps) {
   return (
     <BaseCard
       title={title}
       titleImage={titleImage}
       onAdd={onAdd}
       buttonLabel={buttonLabel}
+      imageFit="cover"
+      imageHeight={180}
     >
       <Group justify="space-between" align="center">
         <Text fw={500} size="sm" truncate="end" style={{ flex: 1 }}>
@@ -46,14 +45,17 @@ export default function MovieCard({
           {releaseDate ? releaseDate.substring(0, 4) : "N/A"}
         </Badge>
         <Badge variant="filled" color="dark" size="sm">
-          {typeof genre === "string" && isNaN(Number(genre))
-            ? genre
-            : (genres[Number(genre)] ?? "Unknown")}
+          {genre ?? "Unknown"}
         </Badge>
       </Group>
-      <Text size="xs" c="dimmed" lineClamp={4} style={{ flex: 1 }}>
-        {overview ?? "No overview available."}
-      </Text>
+      <Group gap={4} wrap="wrap" style={{ flex: 1 }}>
+        {overview &&
+          overview.split(", ").map((platform) => (
+            <Badge key={platform} variant="outline" color="gray" size="xs">
+              {platform}
+            </Badge>
+          ))}
+      </Group>
     </BaseCard>
   );
 }

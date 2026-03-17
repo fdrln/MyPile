@@ -8,6 +8,7 @@ import {
   ActionIcon,
   Group,
   Divider,
+  Loader,
 } from "@mantine/core";
 import { CATEGORIES, type CategoryId } from "../constants/categories";
 import { useState } from "react";
@@ -34,7 +35,7 @@ export default function AddModal({
     null,
   );
   const [searchQuery, setSearchQuery] = useState("");
-  const { results } = useMediaSearch(selectedCategory, searchQuery);
+  const { results, isLoading } = useMediaSearch(selectedCategory, searchQuery);
 
   const handleAdd = async (result: MediaSearchResult) => {
     const baseItem = {
@@ -46,10 +47,28 @@ export default function AddModal({
       overview: result.overview,
     };
 
-    const item =
-      selectedCategory === "tv"
-        ? { ...baseItem, firstAirDate: result.releaseDate }
-        : { ...baseItem, releaseDate: result.releaseDate };
+    const item = (() => {
+      switch (selectedCategory) {
+        case "tv":
+          return { ...baseItem, firstAirDate: result.releaseDate };
+        case "games":
+          return {
+            ...baseItem,
+            releaseDate: result.releaseDate,
+            metacritic: result.metacritic ?? null,
+            platforms: result.overview,
+          };
+        case "books":
+          return {
+            ...baseItem,
+            author: result.overview,
+            publishYear: result.releaseDate,
+          };
+        default:
+          return { ...baseItem, releaseDate: result.releaseDate };
+      }
+    })();
+
     if (selectedCategory !== null) {
       await addItem(selectedCategory, item);
     }
@@ -120,20 +139,26 @@ export default function AddModal({
             labelPosition="left"
             mt="s"
           />
-          <SimpleGrid cols={{ base: 1, sm: 2, lg: 5 }}>
-            {results.map((result) => (
-              <MovieCard
-                key={result.id}
-                title={result.title}
-                titleImage={result.titleImage}
-                releaseDate={result.releaseDate}
-                genre={result.genre}
-                rating={result.rating}
-                overview={result.overview}
-                onAdd={() => handleAdd(result)}
-              />
-            ))}
-          </SimpleGrid>
+          {isLoading ? (
+            <Group justify="center" p="xl">
+              <Loader color={ACCENT_COLOR} />
+            </Group>
+          ) : (
+            <SimpleGrid cols={{ base: 1, sm: 2, lg: 5 }}>
+              {results.map((result) => (
+                <MovieCard
+                  key={result.id}
+                  title={result.title}
+                  titleImage={result.titleImage}
+                  releaseDate={result.releaseDate}
+                  genre={result.genre}
+                  rating={result.rating}
+                  overview={result.overview}
+                  onAdd={() => handleAdd(result)}
+                />
+              ))}
+            </SimpleGrid>
+          )}
         </Stack>
       )}
     </Modal>
