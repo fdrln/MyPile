@@ -1,8 +1,6 @@
 package com.mypile.backend.controller;
 
-import com.mypile.backend.entities.BasePileItem;
-import com.mypile.backend.entities.MoviePileItem;
-import com.mypile.backend.entities.TVPileItem;
+import com.mypile.backend.entities.*;
 import com.mypile.backend.service.PileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +27,16 @@ public class PileController {
     @PostMapping("/tv")
     public BasePileItem addTV(@RequestBody TVPileItem item) {
         return pileService.addTV(item);
+    }
+
+    @PostMapping("/games")
+    public BasePileItem addGame(@RequestBody GamePileItem item) {
+        return pileService.addGame(item);
+    }
+
+    @PostMapping("/books")
+    public BasePileItem addBook(@RequestBody BookPileItem item) {
+        return pileService.addBook(item);
     }
 
     @DeleteMapping("/{category}/{id}")

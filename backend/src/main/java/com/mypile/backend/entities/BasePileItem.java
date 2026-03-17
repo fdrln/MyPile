@@ -18,7 +18,7 @@ public class BasePileItem {
     @Column(name = "image_url")
     private String imageUrl;
     private Double rating;
-    private Integer genre;
+    private String genre;
     @Column(name = "external_id")
     private Long externalId;
     private LocalDateTime addedAt;

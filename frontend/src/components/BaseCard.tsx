@@ -7,6 +7,8 @@ interface BaseCardProps {
   onAdd: () => void;
   children: React.ReactNode;
   buttonLabel?: string;
+  imageFit?: "cover" | "contain";
+  imageHeight?: number;
 }
 
 export default function BaseCard({
@@ -15,6 +17,8 @@ export default function BaseCard({
   onAdd,
   children,
   buttonLabel = "+ Add to pile",
+  imageFit = "contain",
+  imageHeight,
 }: BaseCardProps) {
   return (
     <Card
@@ -39,11 +43,16 @@ export default function BaseCard({
         (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
       }}
     >
-      <CardSection>
+      <CardSection
+        style={
+          imageHeight ? { height: imageHeight, overflow: "hidden" } : undefined
+        }
+      >
         <Image
           src={titleImage}
           alt={title}
-          fit="contain"
+          height={imageHeight}
+          fit={imageFit}
           style={{
             objectPosition: "top",
             background: "#111",
