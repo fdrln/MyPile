@@ -1,0 +1,232 @@
+interface LogoProps {
+  size?: "sm" | "md" | "lg";
+}
+
+export default function Logo({ size = "md" }: LogoProps) {
+  const widths = { sm: 60, md: 120, lg: 200 };
+  const width = widths[size];
+
+  return (
+    <svg width={width} viewBox="255 65 145 155">
+      <g transform="translate(270, 130) rotate(-18)">
+        <rect
+          x="0"
+          y="0"
+          width="52"
+          height="68"
+          rx="3"
+          fill="#2C2C2A"
+          stroke="#444"
+          strokeWidth="1"
+        />
+        <rect
+          x="4"
+          y="4"
+          width="44"
+          height="60"
+          rx="2"
+          fill="#FF6B6B"
+          opacity="0.9"
+        />
+        <rect
+          x="8"
+          y="8"
+          width="36"
+          height="44"
+          rx="1"
+          fill="#CC5454"
+          opacity="0.6"
+        />
+        <line
+          x1="4"
+          y1="4"
+          x2="4"
+          y2="64"
+          stroke="#B24848"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+      </g>
+      <g transform="translate(330, 138) rotate(14)">
+        <rect
+          x="0"
+          y="0"
+          width="48"
+          height="64"
+          rx="2"
+          fill="#3C3434"
+          stroke="#555"
+          strokeWidth="1"
+        />
+        <rect
+          x="0"
+          y="0"
+          width="10"
+          height="64"
+          rx="2"
+          fill="#FF6B6B"
+          opacity="0.95"
+        />
+        <rect
+          x="12"
+          y="8"
+          width="28"
+          height="3"
+          rx="1"
+          fill="#FF9C9C"
+          opacity="0.6"
+        />
+        <rect
+          x="12"
+          y="14"
+          width="20"
+          height="2"
+          rx="1"
+          fill="#FF9C9C"
+          opacity="0.4"
+        />
+        <rect
+          x="12"
+          y="19"
+          width="24"
+          height="2"
+          rx="1"
+          fill="#FF9C9C"
+          opacity="0.4"
+        />
+        <rect
+          x="12"
+          y="38"
+          width="18"
+          height="2"
+          rx="1"
+          fill="#FF9C9C"
+          opacity="0.3"
+        />
+        <rect
+          x="12"
+          y="43"
+          width="22"
+          height="2"
+          rx="1"
+          fill="#FF9C9C"
+          opacity="0.3"
+        />
+      </g>
+      <g transform="translate(295, 108) rotate(-5)">
+        <rect
+          x="0"
+          y="0"
+          width="56"
+          height="52"
+          rx="4"
+          fill="#1a1a1a"
+          stroke="#444"
+          strokeWidth="1"
+        />
+        <rect x="6" y="0" width="44" height="8" rx="2" fill="#111" />
+        <rect
+          x="10"
+          y="12"
+          width="36"
+          height="28"
+          rx="2"
+          fill="#FF6B6B"
+          opacity="0.85"
+        />
+        <rect
+          x="14"
+          y="16"
+          width="28"
+          height="20"
+          rx="1"
+          fill="#CC5454"
+          opacity="0.5"
+        />
+        <circle cx="28" cy="26" r="6" fill="#FF8383" opacity="0.7" />
+        <circle cx="28" cy="26" r="3" fill="#FF6B6B" />
+        <rect x="16" y="44" width="8" height="5" rx="1" fill="#333" />
+        <rect x="32" y="44" width="8" height="5" rx="1" fill="#333" />
+      </g>
+      <g transform="translate(288, 76) rotate(6)">
+        <rect
+          x="0"
+          y="0"
+          width="60"
+          height="44"
+          rx="2"
+          fill="#FF6B6B"
+          stroke="#CC5454"
+          strokeWidth="1"
+        />
+        <rect x="0" y="0" width="60" height="10" rx="2" fill="#E55F5F" />
+        <rect
+          x="8"
+          y="14"
+          width="44"
+          height="3"
+          rx="1"
+          fill="#FF9C9C"
+          opacity="0.7"
+        />
+        <rect
+          x="8"
+          y="20"
+          width="32"
+          height="2"
+          rx="1"
+          fill="#FFB5B5"
+          opacity="0.5"
+        />
+        <rect
+          x="8"
+          y="25"
+          width="38"
+          height="2"
+          rx="1"
+          fill="#FFB5B5"
+          opacity="0.5"
+        />
+        <rect
+          x="8"
+          y="34"
+          width="20"
+          height="2"
+          rx="1"
+          fill="#FFB5B5"
+          opacity="0.35"
+        />
+      </g>
+      <g transform="translate(338, 86) rotate(22)">
+        <rect
+          x="0"
+          y="0"
+          width="36"
+          height="46"
+          rx="3"
+          fill="#2a2a2a"
+          stroke="#444"
+          strokeWidth="0.8"
+        />
+        <rect
+          x="3"
+          y="3"
+          width="30"
+          height="40"
+          rx="2"
+          fill="#B24848"
+          opacity="0.8"
+        />
+        <line
+          x1="3"
+          y1="3"
+          x2="3"
+          y2="43"
+          stroke="#993D3D"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+      </g>
+    </svg>
+  );
+}
