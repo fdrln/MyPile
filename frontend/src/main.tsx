@@ -13,7 +13,7 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <MantineProvider
-        defaultColorScheme="auto"
+        defaultColorScheme="dark"
         theme={{
           primaryColor: "brand",
           colors: {

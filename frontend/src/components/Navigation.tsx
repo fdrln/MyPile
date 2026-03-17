@@ -6,6 +6,7 @@ import {
   IconDeviceGamepad2,
   IconBook,
   IconPlus,
+  IconInfoCircle,
 } from "@tabler/icons-react";
 import Logo from "./Logo";
 import { ACCENT_COLOR } from "../constants/theme";
@@ -13,6 +14,7 @@ import { ACCENT_COLOR } from "../constants/theme";
 interface NavigationProps {
   isMobile: boolean;
   onAddClick: () => void;
+  onAboutClick: () => void;
 }
 
 function NavItem({ to, label }: { to: string; label: string }) {
@@ -57,7 +59,11 @@ function NavIconItem({ to, icon }: { to: string; icon: React.ReactNode }) {
   );
 }
 
-export default function Navigation({ isMobile, onAddClick }: NavigationProps) {
+export default function Navigation({
+  isMobile,
+  onAddClick,
+  onAboutClick,
+}: NavigationProps) {
   return isMobile ? (
     <div
       style={{
@@ -91,9 +97,7 @@ export default function Navigation({ isMobile, onAddClick }: NavigationProps) {
           color={ACCENT_COLOR}
           size="xl"
           radius="xl"
-          style={{
-            boxShadow: `0 4px 16px ${ACCENT_COLOR}66`,
-          }}
+          style={{ boxShadow: `0 4px 16px ${ACCENT_COLOR}66` }}
         >
           <IconPlus size={22} stroke={2} />
         </ActionIcon>
@@ -148,7 +152,21 @@ export default function Navigation({ isMobile, onAddClick }: NavigationProps) {
           <NavItem to="/games" label="Games" />
           <NavItem to="/books" label="Books" />
         </Group>
-        <div />
+        <Group justify="flex-end" gap="xs">
+          <Button
+            onClick={onAboutClick}
+            variant="filled"
+            color={ACCENT_COLOR}
+            size="sm"
+            radius="xl"
+            leftSection={<IconInfoCircle size={14} />}
+            style={{
+              boxShadow: `0 4px 16px ${ACCENT_COLOR}44`,
+            }}
+          >
+            About
+          </Button>
+        </Group>
       </div>
     </AppShellHeader>
   );
