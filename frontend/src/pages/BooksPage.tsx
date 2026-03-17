@@ -48,7 +48,7 @@ export default function BooksPage({ refreshPile }: BooksPageProps) {
           Nothing here yet - hit the + button to add your first book.
         </Text>
       ) : (
-        <SimpleGrid cols={{ base: 3, sm: 4, lg: 6, xl: 8 }} spacing="lg">
+        <SimpleGrid cols={{ base: 2, sm: 4, lg: 6, xl: 8 }} spacing="lg">
           {pile.map((item) => (
             <BookCard
               key={item.id}

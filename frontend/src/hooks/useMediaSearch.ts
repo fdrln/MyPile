@@ -2,8 +2,8 @@ import type { CategoryId } from "../constants/categories";
 import { useState, useEffect } from "react";
 import { BACKEND_BASE } from "../constants/api";
 import type { MediaSearchResult } from "../types/MediaSearchResult";
-import type { TMDBMovie } from "../types/tmdbMovie";
-import type { TMDBTVShow } from "../types/tmdbTV";
+import type { TMDBMovie } from "../types/TmdbMovie";
+import type { TMDBTVShow } from "../types/TmdbTv";
 import type { RAWGGame } from "../types/RawgGame";
 import type { OpenLibraryBook } from "../types/OpenLibrary";
 

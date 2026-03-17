@@ -2,7 +2,7 @@
 
 A personal backlog tracker for movies, TV shows, games and books.
 
-> Built as a learning project to explore React, REST APIs and full-stack development. The code reflects a genuine learning process — some parts are polished, others are honest work-in-progress.
+> Built as a learning project to explore React, REST APIs and full-stack development. Still a WIP and some bandaid fixes for now.
 
 ---
 
@@ -13,7 +13,7 @@ MyPile lets you keep track of everything you want to watch, play or read. Search
 - Browse trending content for inspiration
 - Search across all four categories
 - Add and remove items from your personal pile
-- Clean, mobile-first UI with a desktop view too
+- Mobile UI for easier navigation
 
 ---
 
@@ -33,7 +33,7 @@ _GIFs coming soon_
 
 **Backend**
 
-- Java 21 + Spring Boot 3
+- Java 21 + Spring Boot 4
 - Spring Data JPA
 - SQLite
 
