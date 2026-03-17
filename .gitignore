@@ -9,7 +9,7 @@ frontend/.env.production
 backend/.mvn
 backend/target
 backend/*.db
-
+backend/src/main/resources/application-local.properties
 # OS
 .DS_Store
 Thumbs.db
