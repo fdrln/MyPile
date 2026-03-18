@@ -10,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 import Logo from "./Logo";
 import { ACCENT_COLOR } from "../constants/theme";
+import styles from "./Navigation.module.css";
 
 interface NavigationProps {
   isMobile: boolean;
@@ -25,15 +26,8 @@ function NavItem({ to, label }: { to: string; label: string }) {
           variant="subtle"
           color={isActive ? ACCENT_COLOR : "gray"}
           size="sm"
-          style={{
-            fontWeight: isActive ? 600 : 400,
-            borderBottom: isActive
-              ? `2px solid ${ACCENT_COLOR}`
-              : "2px solid transparent",
-            borderRadius: 0,
-            transition: "all 0.2s ease",
-            paddingBottom: "6px",
-          }}
+          fw={isActive ? 600 : 400}
+          className={`${styles.navItem} ${isActive ? styles.navItemActive : ""}`}
         >
           {label}
         </Button>
@@ -46,12 +40,9 @@ function NavIconItem({ to, icon }: { to: string; icon: React.ReactNode }) {
   return (
     <NavLink
       to={to}
+      className={({ isActive }) => styles.navIconLink}
       style={({ isActive }) => ({
         color: isActive ? ACCENT_COLOR : "rgba(255,255,255,0.5)",
-        padding: "10px",
-        transition: "color 0.2s ease",
-        display: "flex",
-        alignItems: "center",
       })}
     >
       {icon}
@@ -65,26 +56,7 @@ export default function Navigation({
   onAboutClick,
 }: NavigationProps) {
   return isMobile ? (
-    <div
-      style={{
-        position: "fixed",
-        bottom: 16,
-        left: 16,
-        right: 16,
-        display: "flex",
-        justifyContent: "space-around",
-        alignItems: "center",
-        padding: "10px 20px",
-        background: "rgba(30, 26, 24, 0.75)",
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
-        borderRadius: "40px",
-        border: "0.5px solid rgba(255, 255, 255, 0.12)",
-        boxShadow:
-          "0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.08)",
-        zIndex: 100,
-      }}
-    >
+    <div className={styles.pill}>
       <Group justify="center" h="100%" gap="xs">
         <NavIconItem to="/movies" icon={<IconMovie size={26} stroke={1.5} />} />
         <NavIconItem
@@ -109,25 +81,11 @@ export default function Navigation({
       </Group>
     </div>
   ) : (
-    <AppShellHeader
-      style={{
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
-        background: "rgba(26, 24, 23, 0.92)",
-        backdropFilter: "blur(12px)",
-      }}
-    >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr auto 1fr",
-          alignItems: "center",
-          height: "100%",
-          padding: "0 24px",
-        }}
-      >
+    <AppShellHeader className={styles.header}>
+      <div className={styles.headerGrid}>
         <Group align="center" gap="xs">
           <Logo size="sm" />
-          <Text fw={700} size="lg" style={{ letterSpacing: "-0.3px" }}>
+          <Text fw={700} size="lg" className={styles.appName}>
             My<span style={{ color: ACCENT_COLOR }}>Pile</span>
           </Text>
         </Group>
@@ -141,11 +99,8 @@ export default function Navigation({
             size="sm"
             radius="xl"
             leftSection={<IconPlus size={14} />}
-            style={{
-              marginLeft: "8px",
-              marginRight: "8px",
-              boxShadow: `0 4px 16px ${ACCENT_COLOR}44`,
-            }}
+            className={styles.addButton}
+            style={{ boxShadow: `0 4px 16px ${ACCENT_COLOR}44` }}
           >
             Add to Pile
           </Button>
@@ -160,9 +115,7 @@ export default function Navigation({
             size="sm"
             radius="xl"
             leftSection={<IconInfoCircle size={14} />}
-            style={{
-              boxShadow: `0 4px 16px ${ACCENT_COLOR}44`,
-            }}
+            style={{ boxShadow: `0 4px 16px ${ACCENT_COLOR}44` }}
           >
             About
           </Button>

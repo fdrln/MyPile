@@ -14,6 +14,14 @@ interface MovieCardProps {
   buttonLabel?: string;
 }
 
+function resolveGenre(
+  genre: number | string,
+  genres: Record<number, string>,
+): string {
+  if (typeof genre === "string" && isNaN(Number(genre))) return genre;
+  return genres[Number(genre)] ?? "Unknown";
+}
+
 export default function MovieCard({
   title,
   titleImage,
@@ -46,9 +54,7 @@ export default function MovieCard({
           {releaseDate ? releaseDate.substring(0, 4) : "N/A"}
         </Badge>
         <Badge variant="filled" color="dark" size="sm">
-          {typeof genre === "string" && isNaN(Number(genre))
-            ? genre
-            : (genres[Number(genre)] ?? "Unknown")}
+          {resolveGenre(genre, genres)}
         </Badge>
       </Group>
       <Text size="xs" c="dimmed" lineClamp={4} style={{ flex: 1 }}>

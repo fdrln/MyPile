@@ -3,6 +3,7 @@ import { Title, Stack, SimpleGrid, Text } from "@mantine/core";
 import { getItems, deleteItem, type TVPileItem } from "../services/pileService";
 import MovieCard from "../components/MovieCard";
 import { notifications } from "@mantine/notifications";
+import PageHeader from "../components/Pageheader";
 
 interface TVPageProps {
   refreshPile: number;
@@ -17,28 +18,7 @@ export default function TVPage({ refreshPile }: TVPageProps) {
 
   return (
     <Stack p="xl" gap="xl">
-      <div>
-        <Text
-          size="xs"
-          tt="uppercase"
-          c="dimmed"
-          fw={600}
-          style={{ letterSpacing: "2px" }}
-        >
-          Your Collection
-        </Text>
-        <Title
-          order={1}
-          style={{
-            fontSize: "clamp(2rem, 5vw, 3.5rem)",
-            fontWeight: 800,
-            letterSpacing: "-1px",
-            lineHeight: 1.1,
-          }}
-        >
-          TV Shows
-        </Title>
-      </div>
+      <PageHeader title="TV Shows" />
       {pile.length === 0 ? (
         <Text c="dimmed" size="sm">
           Nothing here yet - hit the + button to add your first TV show.

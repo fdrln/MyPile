@@ -7,6 +7,7 @@ import {
 } from "../services/pileService";
 import BookCard from "../components/BookCard";
 import { notifications } from "@mantine/notifications";
+import PageHeader from "../components/Pageheader";
 
 interface BooksPageProps {
   refreshPile: number;
@@ -21,28 +22,7 @@ export default function BooksPage({ refreshPile }: BooksPageProps) {
 
   return (
     <Stack p="xl" gap="xl">
-      <div>
-        <Text
-          size="xs"
-          tt="uppercase"
-          c="dimmed"
-          fw={600}
-          style={{ letterSpacing: "2px" }}
-        >
-          Your Collection
-        </Text>
-        <Title
-          order={1}
-          style={{
-            fontSize: "clamp(2rem, 5vw, 3.5rem)",
-            fontWeight: 800,
-            letterSpacing: "-1px",
-            lineHeight: 1.1,
-          }}
-        >
-          Books
-        </Title>
-      </div>
+      <PageHeader title="Books" />
       {pile.length === 0 ? (
         <Text c="dimmed" size="sm">
           Nothing here yet - hit the + button to add your first book.
