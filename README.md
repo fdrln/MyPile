@@ -71,7 +71,7 @@ _This product uses the TMDB API but is not endorsed or certified by TMDB._
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-username/mypile.git
+git clone https://github.com/fdrln/mypile.git
 cd mypile
 ```
 
