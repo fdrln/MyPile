@@ -2,7 +2,7 @@
 
 A personal backlog tracker for movies, TV shows, games and books.
 
-> Built as a learning project to explore React, REST APIs and full-stack development. Still a WIP and some bandaid fixes for now.
+> Built as a learning project to explore React, REST APIs and full-stack development. Still a WIP.
 
 ---
 
@@ -18,8 +18,15 @@ MyPile lets you keep track of everything you want to watch, play or read. Search
 ---
 
 ## Demo
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/96c88948-32a5-4a82-8ba3-b19051097418" width="65%" alt="MyPile desktop" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/8c4e11d9-5baa-4661-9567-3141eac49d41" width="22%" alt="MyPile mobile" />
+</p>
 
-_GIFs coming soon_
+https://github.com/user-attachments/assets/571db748-a961-4164-b0d8-bb48b8b24e76
+
+
 
 ---
 
@@ -41,7 +48,7 @@ _GIFs coming soon_
 
 ## APIs
 
-All external API calls are proxied through the backend — no API keys are ever exposed to the browser.
+All external API calls go through the backend — no API keys are ever exposed to the browser.
 
 | API                                      | Used for            |
 | ---------------------------------------- | ------------------- |
@@ -128,6 +135,7 @@ mypile/
 - Too many inline styles
 - No duplicate prevention yet
 - Status tracking (want / finished) not yet implemented
-- No Docker setup
+- Search function
+- No Docker setup provided
 
 ---
