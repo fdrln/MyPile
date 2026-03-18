@@ -9,7 +9,7 @@ interface GameCardProps {
   genre: number | string;
   rating?: number;
   overview: string;
-  onAdd: () => void;
+  onAction: () => void;
   buttonLabel?: string;
 }
 
@@ -20,14 +20,14 @@ export default function GameCard({
   genre,
   rating,
   overview,
-  onAdd,
+  onAction,
   buttonLabel,
 }: GameCardProps) {
   return (
     <BaseCard
       title={title}
       titleImage={titleImage}
-      onAdd={onAdd}
+      onAction={onAction}
       buttonLabel={buttonLabel}
       imageFit="cover"
       imageHeight={180}

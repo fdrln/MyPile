@@ -1,0 +1,10 @@
+.label {
+  letter-spacing: 2px;
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}

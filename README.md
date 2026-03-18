@@ -18,6 +18,7 @@ MyPile lets you keep track of everything you want to watch, play or read. Search
 ---
 
 ## Demo
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/96c88948-32a5-4a82-8ba3-b19051097418" width="65%" alt="MyPile desktop" />
   &nbsp;&nbsp;&nbsp;
@@ -25,8 +26,6 @@ MyPile lets you keep track of everything you want to watch, play or read. Search
 </p>
 
 https://github.com/user-attachments/assets/571db748-a961-4164-b0d8-bb48b8b24e76
-
-
 
 ---
 
@@ -71,7 +70,7 @@ _This product uses the TMDB API but is not endorsed or certified by TMDB._
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-username/mypile.git
+git clone https://github.com/fdrln/mypile.git
 cd mypile
 ```
 
@@ -132,7 +131,6 @@ mypile/
 
 ## Issues / Planned
 
-- Too many inline styles
 - No duplicate prevention yet
 - Status tracking (want / finished) not yet implemented
 - Search function

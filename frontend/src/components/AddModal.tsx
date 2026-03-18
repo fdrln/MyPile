@@ -16,7 +16,13 @@ import { ACCENT_COLOR } from "../constants/theme";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { useMediaSearch } from "../hooks/useMediaSearch";
 import MovieCard from "./MovieCard";
-import { addItem } from "../services/pileService";
+import {
+  addItem,
+  type MoviePileItem,
+  type TVPileItem,
+  type GamePileItem,
+  type BookPileItem,
+} from "../services/pileService";
 import type { MediaSearchResult } from "../types/MediaSearchResult";
 import { notifications } from "@mantine/notifications";
 
@@ -24,6 +30,40 @@ interface AddModalProps {
   opened: boolean;
   onClose: () => void;
   onItemAdded: () => void;
+}
+
+function buildPileItem(
+  result: MediaSearchResult,
+  category: CategoryId,
+): MoviePileItem | TVPileItem | GamePileItem | BookPileItem {
+  const base = {
+    externalId: result.id,
+    title: result.title,
+    imageUrl: result.titleImage,
+    genre: result.genre,
+    rating: result.rating,
+    overview: result.overview,
+  };
+
+  switch (category) {
+    case "tv":
+      return { ...base, firstAirDate: result.releaseDate } as TVPileItem;
+    case "games":
+      return {
+        ...base,
+        releaseDate: result.releaseDate,
+        metacritic: result.metacritic ?? null,
+        platforms: result.overview,
+      } as GamePileItem;
+    case "books":
+      return {
+        ...base,
+        author: result.overview,
+        publishYear: result.releaseDate,
+      } as BookPileItem;
+    default:
+      return { ...base, releaseDate: result.releaseDate } as MoviePileItem;
+  }
 }
 
 export default function AddModal({
@@ -38,40 +78,8 @@ export default function AddModal({
   const { results, isLoading } = useMediaSearch(selectedCategory, searchQuery);
 
   const handleAdd = async (result: MediaSearchResult) => {
-    const baseItem = {
-      externalId: result.id,
-      title: result.title,
-      imageUrl: result.titleImage,
-      genre: result.genre,
-      rating: result.rating,
-      overview: result.overview,
-    };
-
-    const item = (() => {
-      switch (selectedCategory) {
-        case "tv":
-          return { ...baseItem, firstAirDate: result.releaseDate };
-        case "games":
-          return {
-            ...baseItem,
-            releaseDate: result.releaseDate,
-            metacritic: result.metacritic ?? null,
-            platforms: result.overview,
-          };
-        case "books":
-          return {
-            ...baseItem,
-            author: result.overview,
-            publishYear: result.releaseDate,
-          };
-        default:
-          return { ...baseItem, releaseDate: result.releaseDate };
-      }
-    })();
-
-    if (selectedCategory !== null) {
-      await addItem(selectedCategory, item);
-    }
+    if (!selectedCategory) return;
+    await addItem(selectedCategory, buildPileItem(result, selectedCategory));
     onItemAdded();
     notifications.show({
       title: "Added to pile!",
@@ -86,6 +94,10 @@ export default function AddModal({
     onClose();
   };
 
+  const selectedCategoryLabel = CATEGORIES.find(
+    (c) => c.id === selectedCategory,
+  )?.label;
+
   return (
     <Modal
       opened={opened}
@@ -95,7 +107,7 @@ export default function AddModal({
       title={
         selectedCategory === null
           ? "Add to Pile"
-          : `Add ${CATEGORIES.find((c) => c.id === selectedCategory)?.label}`
+          : `Add ${selectedCategoryLabel}`
       }
     >
       {selectedCategory === null ? (
@@ -125,9 +137,7 @@ export default function AddModal({
             >
               <IconArrowLeft />
             </ActionIcon>
-            <Text fw={500}>
-              {CATEGORIES.find((c) => c.id === selectedCategory)?.label}
-            </Text>
+            <Text fw={500}>{selectedCategoryLabel}</Text>
           </Group>
           <TextInput
             placeholder="Search..."
@@ -154,7 +164,7 @@ export default function AddModal({
                   genre={result.genre}
                   rating={result.rating}
                   overview={result.overview}
-                  onAdd={() => handleAdd(result)}
+                  onAction={() => handleAdd(result)}
                 />
               ))}
             </SimpleGrid>

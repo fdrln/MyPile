@@ -21,7 +21,7 @@ export default function App() {
     <AppShell header={!isMobile ? { height: 100 } : undefined}>
       <Navigation
         isMobile={isMobile ?? false}
-        onAddClick={open}
+        onActionClick={open}
         onAboutClick={openAbout}
       />
       <AddModal

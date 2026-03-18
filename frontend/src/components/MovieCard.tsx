@@ -10,8 +10,16 @@ interface MovieCardProps {
   genre: number | string;
   rating?: number;
   overview: string;
-  onAdd: () => void;
+  onAction: () => void;
   buttonLabel?: string;
+}
+
+function resolveGenre(
+  genre: number | string,
+  genres: Record<number, string>,
+): string {
+  if (typeof genre === "string" && isNaN(Number(genre))) return genre;
+  return genres[Number(genre)] ?? "Unknown";
 }
 
 export default function MovieCard({
@@ -22,7 +30,7 @@ export default function MovieCard({
   rating,
   overview,
   buttonLabel,
-  onAdd,
+  onAction,
 }: MovieCardProps) {
   const genres = useGenres();
 
@@ -30,7 +38,7 @@ export default function MovieCard({
     <BaseCard
       title={title}
       titleImage={titleImage}
-      onAdd={onAdd}
+      onAction={onAction}
       buttonLabel={buttonLabel}
     >
       <Group justify="space-between" align="center">
@@ -46,9 +54,7 @@ export default function MovieCard({
           {releaseDate ? releaseDate.substring(0, 4) : "N/A"}
         </Badge>
         <Badge variant="filled" color="dark" size="sm">
-          {typeof genre === "string" && isNaN(Number(genre))
-            ? genre
-            : (genres[Number(genre)] ?? "Unknown")}
+          {resolveGenre(genre, genres)}
         </Badge>
       </Group>
       <Text size="xs" c="dimmed" lineClamp={4} style={{ flex: 1 }}>
