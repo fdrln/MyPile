@@ -5,7 +5,7 @@ import styles from "./BaseCard.module.css";
 interface BaseCardProps {
   title: string;
   titleImage: string;
-  onAdd: () => void;
+  onAction: () => void;
   children: React.ReactNode;
   buttonLabel?: string;
   imageFit?: "cover" | "contain";
@@ -15,7 +15,7 @@ interface BaseCardProps {
 export default function BaseCard({
   title,
   titleImage,
-  onAdd,
+  onAction,
   children,
   buttonLabel = "+ Add to pile",
   imageFit = "contain",
@@ -47,7 +47,7 @@ export default function BaseCard({
           mt={4}
           radius="xl"
           fw={500}
-          onClick={onAdd}
+          onClick={onAction}
         >
           {buttonLabel}
         </Button>

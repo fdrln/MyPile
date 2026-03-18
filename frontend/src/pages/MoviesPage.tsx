@@ -39,7 +39,7 @@ export default function MoviesPage({ refreshPile }: MoviesPageProps) {
               rating={item.rating}
               overview={item.overview}
               buttonLabel="Remove from pile"
-              onAdd={() =>
+              onAction={() =>
                 deleteItem("movies", item.id!).then(() => {
                   getItems("movies").then(setPile);
                   notifications.show({

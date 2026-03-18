@@ -35,7 +35,7 @@ export default function TVPage({ refreshPile }: TVPageProps) {
               rating={item.rating}
               overview={item.overview}
               buttonLabel="Remove from pile"
-              onAdd={() =>
+              onAction={() =>
                 deleteItem("tv", item.id!).then(() => {
                   getItems("tv").then(setPile);
                   notifications.show({

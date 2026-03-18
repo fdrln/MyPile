@@ -164,7 +164,7 @@ export default function AddModal({
                   genre={result.genre}
                   rating={result.rating}
                   overview={result.overview}
-                  onAdd={() => handleAdd(result)}
+                  onAction={() => handleAdd(result)}
                 />
               ))}
             </SimpleGrid>

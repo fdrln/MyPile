@@ -7,7 +7,7 @@ interface BookCardProps {
   author: string;
   publishYear: string;
   genre: number | string;
-  onAdd: () => void;
+  onAction: () => void;
   buttonLabel?: string;
 }
 
@@ -17,14 +17,14 @@ export default function BookCard({
   author,
   publishYear,
   genre,
-  onAdd,
+  onAction,
   buttonLabel,
 }: BookCardProps) {
   return (
     <BaseCard
       title={title}
       titleImage={titleImage}
-      onAdd={onAdd}
+      onAction={onAction}
       buttonLabel={buttonLabel}
       imageFit="cover"
       imageHeight={220}

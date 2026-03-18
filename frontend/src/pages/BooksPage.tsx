@@ -38,7 +38,7 @@ export default function BooksPage({ refreshPile }: BooksPageProps) {
               publishYear={item.publishYear ?? ""}
               genre={item.genre}
               buttonLabel="Remove from pile"
-              onAdd={() =>
+              onAction={() =>
                 deleteItem("books", item.id!).then(() => {
                   getItems("books").then(setPile);
                   notifications.show({

@@ -39,7 +39,7 @@ export default function GamesPage({ refreshPile }: GamesPageProps) {
               rating={item.rating}
               overview={item.platforms ?? ""}
               buttonLabel="Remove from pile"
-              onAdd={() =>
+              onAction={() =>
                 deleteItem("games", item.id!).then(() => {
                   getItems("games").then(setPile);
                   notifications.show({

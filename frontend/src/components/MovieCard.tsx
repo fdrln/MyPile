@@ -10,7 +10,7 @@ interface MovieCardProps {
   genre: number | string;
   rating?: number;
   overview: string;
-  onAdd: () => void;
+  onAction: () => void;
   buttonLabel?: string;
 }
 
@@ -30,7 +30,7 @@ export default function MovieCard({
   rating,
   overview,
   buttonLabel,
-  onAdd,
+  onAction,
 }: MovieCardProps) {
   const genres = useGenres();
 
@@ -38,7 +38,7 @@ export default function MovieCard({
     <BaseCard
       title={title}
       titleImage={titleImage}
-      onAdd={onAdd}
+      onAction={onAction}
       buttonLabel={buttonLabel}
     >
       <Group justify="space-between" align="center">

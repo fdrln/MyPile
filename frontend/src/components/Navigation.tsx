@@ -14,7 +14,7 @@ import styles from "./Navigation.module.css";
 
 interface NavigationProps {
   isMobile: boolean;
-  onAddClick: () => void;
+  onActionClick: () => void;
   onAboutClick: () => void;
 }
 
@@ -52,7 +52,7 @@ function NavIconItem({ to, icon }: { to: string; icon: React.ReactNode }) {
 
 export default function Navigation({
   isMobile,
-  onAddClick,
+  onActionClick,
   onAboutClick,
 }: NavigationProps) {
   return isMobile ? (
@@ -64,7 +64,7 @@ export default function Navigation({
           icon={<IconDeviceTvOld size={26} stroke={1.5} />}
         />
         <ActionIcon
-          onClick={onAddClick}
+          onClick={onActionClick}
           variant="filled"
           color={ACCENT_COLOR}
           size="xl"
@@ -93,7 +93,7 @@ export default function Navigation({
           <NavItem to="/movies" label="Movies" />
           <NavItem to="/tv" label="TV" />
           <Button
-            onClick={onAddClick}
+            onClick={onActionClick}
             variant="filled"
             color={ACCENT_COLOR}
             size="sm"
