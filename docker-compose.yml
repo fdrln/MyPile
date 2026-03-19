@@ -1,0 +1,18 @@
+services:
+  backend:
+    build: ./backend
+    environment:
+      - TMDB_API_KEY=${TMDB_API_KEY}
+      - RAWG_API_KEY=${RAWG_API_KEY}
+      - SPRING_PROFILES_ACTIVE=docker
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped

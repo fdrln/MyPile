@@ -7,7 +7,7 @@ import {
 } from "../services/pileService";
 import BookCard from "../components/BookCard";
 import { notifications } from "@mantine/notifications";
-import PageHeader from "../components/Pageheader";
+import PageHeader from "../components/PageHeader";
 
 interface BooksPageProps {
   refreshPile: number;

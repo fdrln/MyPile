@@ -7,7 +7,7 @@ import {
 } from "../services/pileService";
 import GameCard from "../components/GameCard";
 import { notifications } from "@mantine/notifications";
-import PageHeader from "../components/Pageheader";
+import PageHeader from "../components/PageHeader";
 
 interface GamesPageProps {
   refreshPile: number;

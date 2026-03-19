@@ -3,7 +3,7 @@ import { Stack, SimpleGrid, Text } from "@mantine/core";
 import { getItems, deleteItem, type TVPileItem } from "../services/pileService";
 import MovieCard from "../components/MovieCard";
 import { notifications } from "@mantine/notifications";
-import PageHeader from "../components/Pageheader";
+import PageHeader from "../components/PageHeader";
 
 interface TVPageProps {
   refreshPile: number;
