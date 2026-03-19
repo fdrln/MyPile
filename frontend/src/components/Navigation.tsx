@@ -40,7 +40,7 @@ function NavIconItem({ to, icon }: { to: string; icon: React.ReactNode }) {
   return (
     <NavLink
       to={to}
-      className={({ isActive }) => styles.navIconLink}
+      className={() => styles.navIconLink}
       style={({ isActive }) => ({
         color: isActive ? ACCENT_COLOR : "rgba(255,255,255,0.5)",
       })}

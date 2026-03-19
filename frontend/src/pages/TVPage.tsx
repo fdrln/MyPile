@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Title, Stack, SimpleGrid, Text } from "@mantine/core";
+import { Stack, SimpleGrid, Text } from "@mantine/core";
 import { getItems, deleteItem, type TVPileItem } from "../services/pileService";
 import MovieCard from "../components/MovieCard";
 import { notifications } from "@mantine/notifications";
