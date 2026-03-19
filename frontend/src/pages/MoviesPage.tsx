@@ -6,7 +6,7 @@ import {
   type MoviePileItem,
 } from "../services/pileService";
 import MovieCard from "../components/MovieCard";
-import PageHeader from "../components/Pageheader";
+import PageHeader from "../components/PageHeader";
 import { notifications } from "@mantine/notifications";
 
 interface MoviesPageProps {

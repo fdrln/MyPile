@@ -59,49 +59,18 @@ _This product uses the TMDB API but is not endorsed or certified by TMDB._
 
 ---
 
-## Local Setup
+## Docker Setup
 
-### Prerequisites
+Get a free API key from TMDB and RAWG.
 
-- Node.js 18+
-- Java 21
-- Maven
+Change `.env.example` to `.env` and fill in your keys
 
-### 1. Clone the repo
-
-```bash
-git clone https://github.com/fdrln/mypile.git
-cd mypile
+```
+TMDB_API_KEY=your_tmdb_key_here
+RAWG_API_KEY=your_rawg_key_here
 ```
 
-### 2. Backend
-
-Get a free API key from [TMDB](https://www.themoviedb.org/settings/api) and [RAWG](https://rawg.io/apidocs).
-
-Create `backend/src/main/resources/application-local.properties`:
-
-```properties
-spring.profiles.active=local
-tmdb.api.key=your_tmdb_key
-rawg.api.key=your_rawg_key
-```
-
-Then run:
-
-```bash
-cd backend
-./mvnw spring-boot:run
-```
-
-### 3. Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Open [http://localhost:5173](http://localhost:5173)
+Then run `docker-compose up --build` from project root.
 
 ---
 
@@ -134,6 +103,6 @@ mypile/
 - No duplicate prevention yet
 - Status tracking (want / finished) not yet implemented
 - Search function
-- No Docker setup provided
+- "Details" view per item
 
 ---
