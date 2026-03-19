@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Title, Stack, SimpleGrid, Text, Anchor } from "@mantine/core";
+import { Stack, SimpleGrid, Text, Anchor } from "@mantine/core";
 import {
   getItems,
   deleteItem,
