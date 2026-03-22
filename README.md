@@ -25,7 +25,10 @@ MyPile lets you keep track of everything you want to watch, play or read. Search
   <img src="https://github.com/user-attachments/assets/8c4e11d9-5baa-4661-9567-3141eac49d41" width="22%" alt="MyPile mobile" />
 </p>
 
-https://github.com/user-attachments/assets/571db748-a961-4164-b0d8-bb48b8b24e76
+
+
+https://github.com/user-attachments/assets/8a8e3507-18f4-4f7f-b70f-cc2146f2abcc
+
 
 ---
 
