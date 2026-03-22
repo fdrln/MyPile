@@ -73,6 +73,15 @@ export default function BooksPage({ refreshPile }: BooksPageProps) {
         category="books"
         externalId={selectedId}
         openLibraryKey={selectedKey}
+        onAction={() => {
+          const item = pile.find((i) => i.externalId === selectedId);
+          if (item)
+            deleteItem("books", item.id!).then(() => {
+              getItems("books").then(setPile);
+              closeDetail();
+            });
+        }}
+        actionLabel="Remove from pile"
       />
     </Stack>
   );

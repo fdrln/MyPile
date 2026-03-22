@@ -65,6 +65,15 @@ export default function TVPage({ refreshPile }: TVPageProps) {
         onClose={closeDetail}
         category="tv"
         externalId={selectedId}
+        onAction={() => {
+          const item = pile.find((i) => i.externalId === selectedId);
+          if (item)
+            deleteItem("tv", item.id!).then(() => {
+              getItems("tv").then(setPile);
+              closeDetail();
+            });
+        }}
+        actionLabel="Remove from pile"
       />
     </Stack>
   );
