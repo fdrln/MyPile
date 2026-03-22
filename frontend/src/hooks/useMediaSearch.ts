@@ -95,6 +95,7 @@ export function useMediaSearch(
                       titleImage: item.cover_i
                         ? `${OL_COVER_BASE}/${item.cover_i}-L.jpg`
                         : "",
+                      openLibraryKey: item.key,
                     }),
                   );
                 }

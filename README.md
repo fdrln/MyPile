@@ -103,6 +103,7 @@ mypile/
 - No duplicate prevention yet
 - Status tracking (want / finished) not yet implemented
 - Search function
-- "Details" view per item
+- Some code repeats itself through multiple files
+- Some files have too much going on and should be seperated
 
 ---

@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { Stack, SimpleGrid, Text, Anchor } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import {
   getItems,
   deleteItem,
   type GamePileItem,
 } from "../services/pileService";
 import GameCard from "../components/GameCard";
-import { notifications } from "@mantine/notifications";
 import PageHeader from "../components/PageHeader";
+import DetailModal from "../components/DetailModal";
+import { notifications } from "@mantine/notifications";
 
 interface GamesPageProps {
   refreshPile: number;
@@ -15,10 +17,18 @@ interface GamesPageProps {
 
 export default function GamesPage({ refreshPile }: GamesPageProps) {
   const [pile, setPile] = useState<GamePileItem[]>([]);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [detailOpened, { open: openDetail, close: closeDetail }] =
+    useDisclosure(false);
 
   useEffect(() => {
     getItems("games").then((data) => setPile(data));
   }, [refreshPile]);
+
+  const handleImageClick = (id: number) => {
+    setSelectedId(id);
+    openDetail();
+  };
 
   return (
     <Stack p="xl" gap="xl">
@@ -28,7 +38,7 @@ export default function GamesPage({ refreshPile }: GamesPageProps) {
           Nothing here yet — hit the + button to add your first game.
         </Text>
       ) : (
-        <SimpleGrid cols={{ base: 2, sm: 4, lg: 6, xl: 8 }} spacing="lg">
+        <SimpleGrid cols={{ base: 3, sm: 4, lg: 6, xl: 8 }} spacing="lg">
           {pile.map((item) => (
             <GameCard
               key={item.id}
@@ -39,6 +49,7 @@ export default function GamesPage({ refreshPile }: GamesPageProps) {
               rating={item.rating}
               overview={item.platforms ?? ""}
               buttonLabel="Remove from pile"
+              onImageClick={() => handleImageClick(item.externalId)}
               onAction={() =>
                 deleteItem("games", item.id!).then(() => {
                   getItems("games").then(setPile);
@@ -59,6 +70,12 @@ export default function GamesPage({ refreshPile }: GamesPageProps) {
           RAWG
         </Anchor>
       </Text>
+      <DetailModal
+        opened={detailOpened}
+        onClose={closeDetail}
+        category="games"
+        externalId={selectedId}
+      />
     </Stack>
   );
 }

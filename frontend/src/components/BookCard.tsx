@@ -8,6 +8,7 @@ interface BookCardProps {
   publishYear: string;
   genre: number | string;
   onAction: () => void;
+  onImageClick?: () => void;
   buttonLabel?: string;
 }
 
@@ -18,6 +19,7 @@ export default function BookCard({
   publishYear,
   genre,
   onAction,
+  onImageClick,
   buttonLabel,
 }: BookCardProps) {
   return (
@@ -25,6 +27,7 @@ export default function BookCard({
       title={title}
       titleImage={titleImage}
       onAction={onAction}
+      onImageClick={onImageClick}
       buttonLabel={buttonLabel}
       imageFit="cover"
       imageHeight={220}

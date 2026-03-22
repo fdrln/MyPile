@@ -20,6 +20,15 @@
   width: 100%;
 }
 
+.imageClickable {
+  cursor: pointer;
+}
+
+.imageClickable:hover {
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
 .content {
   padding: 12px 14px;
   display: flex;

@@ -11,6 +11,7 @@ interface MovieCardProps {
   rating?: number;
   overview: string;
   onAction: () => void;
+  onImageClick?: () => void;
   buttonLabel?: string;
 }
 
@@ -31,6 +32,7 @@ export default function MovieCard({
   overview,
   buttonLabel,
   onAction,
+  onImageClick,
 }: MovieCardProps) {
   const genres = useGenres();
 
@@ -39,6 +41,7 @@ export default function MovieCard({
       title={title}
       titleImage={titleImage}
       onAction={onAction}
+      onImageClick={onImageClick}
       buttonLabel={buttonLabel}
     >
       <Group justify="space-between" align="center">

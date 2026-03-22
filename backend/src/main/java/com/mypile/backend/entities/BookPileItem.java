@@ -10,4 +10,5 @@ import lombok.EqualsAndHashCode;
 public class BookPileItem extends BasePileItem {
     private String author;
     private String publishYear;
+    private String openLibraryKey;
 }
