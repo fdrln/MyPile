@@ -8,6 +8,7 @@ import {
   Loader,
   Divider,
   SimpleGrid,
+  Button,
 } from "@mantine/core";
 import { useMediaDetail } from "../hooks/useMediaDetail";
 import { ACCENT_COLOR } from "../constants/theme";
@@ -18,6 +19,8 @@ interface DetailModalProps {
   category: string | null;
   externalId: number | null;
   openLibraryKey?: string;
+  onAction?: () => void;
+  actionLabel?: string;
 }
 
 function formatRuntime(minutes: number): string {
@@ -40,6 +43,8 @@ export default function DetailModal({
   category,
   externalId,
   openLibraryKey,
+  onAction,
+  actionLabel,
 }: DetailModalProps) {
   const { detail, isLoading } = useMediaDetail(
     opened ? category : null,
@@ -226,6 +231,22 @@ export default function DetailModal({
                   </Badge>
                 ))}
               </Group>
+            </>
+          )}
+
+          {onAction && (
+            <>
+              <Divider />
+              <Button
+                color={ACCENT_COLOR}
+                variant="light"
+                fullWidth
+                radius="xl"
+                fw={500}
+                onClick={onAction}
+              >
+                {actionLabel ?? "+ Add to pile"}
+              </Button>
             </>
           )}
         </Stack>

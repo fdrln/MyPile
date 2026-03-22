@@ -195,6 +195,16 @@ export default function AddModal({
         category={selectedCategory}
         externalId={detailId}
         openLibraryKey={detailKey}
+        onAction={
+          detailId !== null
+            ? () => {
+                const result = results.find((r) => r.id === detailId);
+                if (result) handleAdd(result);
+                closeDetail();
+              }
+            : undefined
+        }
+        actionLabel="+ Add to pile"
       />
     </>
   );

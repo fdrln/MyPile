@@ -75,6 +75,15 @@ export default function GamesPage({ refreshPile }: GamesPageProps) {
         onClose={closeDetail}
         category="games"
         externalId={selectedId}
+        onAction={() => {
+          const item = pile.find((i) => i.externalId === selectedId);
+          if (item)
+            deleteItem("games", item.id!).then(() => {
+              getItems("games").then(setPile);
+              closeDetail();
+            });
+        }}
+        actionLabel="Remove from pile"
       />
     </Stack>
   );

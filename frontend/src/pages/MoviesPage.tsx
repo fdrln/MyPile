@@ -69,6 +69,15 @@ export default function MoviesPage({ refreshPile }: MoviesPageProps) {
         onClose={closeDetail}
         category="movies"
         externalId={selectedId}
+        onAction={() => {
+          const item = pile.find((i) => i.externalId === selectedId);
+          if (item)
+            deleteItem("movies", item.id!).then(() => {
+              getItems("movies").then(setPile);
+              closeDetail();
+            });
+        }}
+        actionLabel="Remove from pile"
       />
     </Stack>
   );
