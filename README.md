@@ -2,7 +2,7 @@
 
 A personal backlog tracker for movies, TV shows, games and books.
 
-> Built as a learning project to explore React, REST APIs and full-stack development. Still a WIP.
+> Built as a learning project to explore React, REST APIs and full-stack development. It's still a WIP, there's some repeated code as well as some bandaid fixes that I'd like to replace.
 
 ---
 
