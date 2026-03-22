@@ -10,6 +10,7 @@ interface GameCardProps {
   rating?: number;
   overview: string;
   onAction: () => void;
+  onImageClick?: () => void;
   buttonLabel?: string;
 }
 
@@ -21,6 +22,7 @@ export default function GameCard({
   rating,
   overview,
   onAction,
+  onImageClick,
   buttonLabel,
 }: GameCardProps) {
   return (
@@ -28,6 +30,7 @@ export default function GameCard({
       title={title}
       titleImage={titleImage}
       onAction={onAction}
+      onImageClick={onImageClick}
       buttonLabel={buttonLabel}
       imageFit="cover"
       imageHeight={180}

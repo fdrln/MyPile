@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { Stack, SimpleGrid, Text } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import {
   getItems,
   deleteItem,
   type BookPileItem,
 } from "../services/pileService";
 import BookCard from "../components/BookCard";
-import { notifications } from "@mantine/notifications";
 import PageHeader from "../components/PageHeader";
+import DetailModal from "../components/DetailModal";
+import { notifications } from "@mantine/notifications";
 
 interface BooksPageProps {
   refreshPile: number;
@@ -15,20 +17,30 @@ interface BooksPageProps {
 
 export default function BooksPage({ refreshPile }: BooksPageProps) {
   const [pile, setPile] = useState<BookPileItem[]>([]);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [selectedKey, setSelectedKey] = useState<string | undefined>(undefined);
+  const [detailOpened, { open: openDetail, close: closeDetail }] =
+    useDisclosure(false);
 
   useEffect(() => {
     getItems("books").then((data) => setPile(data));
   }, [refreshPile]);
+
+  const handleImageClick = (id: number, openLibraryKey?: string) => {
+    setSelectedId(id);
+    setSelectedKey(openLibraryKey);
+    openDetail();
+  };
 
   return (
     <Stack p="xl" gap="xl">
       <PageHeader title="Books" />
       {pile.length === 0 ? (
         <Text c="dimmed" size="sm">
-          Nothing here yet - hit the + button to add your first book.
+          Nothing here yet — hit the + button to add your first book.
         </Text>
       ) : (
-        <SimpleGrid cols={{ base: 2, sm: 4, lg: 6, xl: 8 }} spacing="lg">
+        <SimpleGrid cols={{ base: 3, sm: 4, lg: 6, xl: 8 }} spacing="lg">
           {pile.map((item) => (
             <BookCard
               key={item.id}
@@ -38,6 +50,9 @@ export default function BooksPage({ refreshPile }: BooksPageProps) {
               publishYear={item.publishYear ?? ""}
               genre={item.genre}
               buttonLabel="Remove from pile"
+              onImageClick={() =>
+                handleImageClick(item.externalId, item.openLibraryKey)
+              }
               onAction={() =>
                 deleteItem("books", item.id!).then(() => {
                   getItems("books").then(setPile);
@@ -52,6 +67,13 @@ export default function BooksPage({ refreshPile }: BooksPageProps) {
           ))}
         </SimpleGrid>
       )}
+      <DetailModal
+        opened={detailOpened}
+        onClose={closeDetail}
+        category="books"
+        externalId={selectedId}
+        openLibraryKey={selectedKey}
+      />
     </Stack>
   );
 }

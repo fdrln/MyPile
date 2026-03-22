@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Stack, SimpleGrid, Text } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import {
   getItems,
   deleteItem,
@@ -7,6 +8,7 @@ import {
 } from "../services/pileService";
 import MovieCard from "../components/MovieCard";
 import PageHeader from "../components/PageHeader";
+import DetailModal from "../components/DetailModal";
 import { notifications } from "@mantine/notifications";
 
 interface MoviesPageProps {
@@ -15,10 +17,18 @@ interface MoviesPageProps {
 
 export default function MoviesPage({ refreshPile }: MoviesPageProps) {
   const [pile, setPile] = useState<MoviePileItem[]>([]);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [detailOpened, { open: openDetail, close: closeDetail }] =
+    useDisclosure(false);
 
   useEffect(() => {
     getItems("movies").then((data) => setPile(data));
   }, [refreshPile]);
+
+  const handleImageClick = (id: number) => {
+    setSelectedId(id);
+    openDetail();
+  };
 
   return (
     <Stack p="xl" gap="xl">
@@ -28,7 +38,7 @@ export default function MoviesPage({ refreshPile }: MoviesPageProps) {
           Nothing here yet — hit the + button to add your first movie.
         </Text>
       ) : (
-        <SimpleGrid cols={{ base: 2, sm: 4, lg: 6, xl: 8 }} spacing="lg">
+        <SimpleGrid cols={{ base: 3, sm: 4, lg: 6, xl: 8 }} spacing="lg">
           {pile.map((item) => (
             <MovieCard
               key={item.id}
@@ -39,6 +49,7 @@ export default function MoviesPage({ refreshPile }: MoviesPageProps) {
               rating={item.rating}
               overview={item.overview}
               buttonLabel="Remove from pile"
+              onImageClick={() => handleImageClick(item.externalId)}
               onAction={() =>
                 deleteItem("movies", item.id!).then(() => {
                   getItems("movies").then(setPile);
@@ -53,6 +64,12 @@ export default function MoviesPage({ refreshPile }: MoviesPageProps) {
           ))}
         </SimpleGrid>
       )}
+      <DetailModal
+        opened={detailOpened}
+        onClose={closeDetail}
+        category="movies"
+        externalId={selectedId}
+      />
     </Stack>
   );
 }

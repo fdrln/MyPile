@@ -7,4 +7,5 @@ export interface MediaSearchResult {
   genre: number | string;
   titleImage: string;
   metacritic?: number;
+  openLibraryKey?: string;
 }

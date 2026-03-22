@@ -6,6 +6,7 @@ interface BaseCardProps {
   title: string;
   titleImage: string;
   onAction: () => void;
+  onImageClick?: () => void;
   children: React.ReactNode;
   buttonLabel?: string;
   imageFit?: "cover" | "contain";
@@ -16,6 +17,7 @@ export default function BaseCard({
   title,
   titleImage,
   onAction,
+  onImageClick,
   children,
   buttonLabel = "+ Add to pile",
   imageFit = "contain",
@@ -27,6 +29,8 @@ export default function BaseCard({
         style={
           imageHeight ? { height: imageHeight, overflow: "hidden" } : undefined
         }
+        onClick={onImageClick}
+        className={onImageClick ? styles.imageClickable : undefined}
       >
         <Image
           src={titleImage}

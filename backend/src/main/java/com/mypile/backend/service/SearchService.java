@@ -86,4 +86,32 @@ public class SearchService {
                 .body(String.class);
         return "{\"movie\":" + movieGenres + ",\"tv\":" + tvGenres + "}";
     }
+
+    public String getMovieDetail(Long id) {
+        return restClient.get()
+                .uri(TMDB_BASE + "/movie/" + id + "?api_key=" + tmdbKey)
+                .retrieve()
+                .body(String.class);
+    }
+
+    public String getTVDetail(Long id) {
+        return restClient.get()
+                .uri(TMDB_BASE + "/tv/" + id + "?api_key=" + tmdbKey)
+                .retrieve()
+                .body(String.class);
+    }
+
+    public String getGameDetail(Long id) {
+        return restClient.get()
+                .uri(RAWG_BASE + "/games/" + id + "?key=" + rawgKey)
+                .retrieve()
+                .body(String.class);
+    }
+
+    public String getBookDetail(String key) {
+        return restClient.get()
+                .uri("https://openlibrary.org" + key + ".json")
+                .retrieve()
+                .body(String.class);
+    }
 }

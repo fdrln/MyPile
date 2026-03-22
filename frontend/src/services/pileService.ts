@@ -29,6 +29,7 @@ export interface GamePileItem extends PileItem {
 export interface BookPileItem extends PileItem {
   author?: string;
   publishYear?: string;
+  openLibraryKey?: string;
 }
 
 export async function getItems(category: string) {
