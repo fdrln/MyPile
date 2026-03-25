@@ -87,7 +87,19 @@ export default function AddModal({
 
   const handleAdd = async (result: MediaSearchResult) => {
     if (!selectedCategory) return;
-    await addItem(selectedCategory, buildPileItem(result, selectedCategory));
+    const saved = await addItem(
+      selectedCategory,
+      buildPileItem(result, selectedCategory),
+    );
+
+    if (saved === null) {
+      notifications.show({
+        title: "Already in your pile",
+        message: `${result.title} is already in your pile`,
+        color: "yellow",
+      });
+      return;
+    }
     onItemAdded();
     notifications.show({
       title: "Added to pile!",
