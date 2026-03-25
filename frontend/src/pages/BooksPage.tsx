@@ -1,88 +1,33 @@
-import { useEffect, useState } from "react";
-import { Stack, SimpleGrid, Text } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import {
-  getItems,
-  deleteItem,
-  type BookPileItem,
-} from "../services/pileService";
+import CategoryPage from "../components/CategoryPage";
 import BookCard from "../components/BookCard";
-import PageHeader from "../components/PageHeader";
-import DetailModal from "../components/DetailModal";
-import { notifications } from "@mantine/notifications";
+import type { BookPileItem } from "../services/pileService";
 
 interface BooksPageProps {
   refreshPile: number;
 }
 
 export default function BooksPage({ refreshPile }: BooksPageProps) {
-  const [pile, setPile] = useState<BookPileItem[]>([]);
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [selectedKey, setSelectedKey] = useState<string | undefined>(undefined);
-  const [detailOpened, { open: openDetail, close: closeDetail }] =
-    useDisclosure(false);
-
-  useEffect(() => {
-    getItems("books").then((data) => setPile(data));
-  }, [refreshPile]);
-
-  const handleImageClick = (id: number, openLibraryKey?: string) => {
-    setSelectedId(id);
-    setSelectedKey(openLibraryKey);
-    openDetail();
-  };
-
   return (
-    <Stack p="xl" gap="xl">
-      <PageHeader title="Books" />
-      {pile.length === 0 ? (
-        <Text c="dimmed" size="sm">
-          Nothing here yet — hit the + button to add your first book.
-        </Text>
-      ) : (
-        <SimpleGrid cols={{ base: 3, sm: 4, lg: 6, xl: 8 }} spacing="lg">
-          {pile.map((item) => (
-            <BookCard
-              key={item.id}
-              title={item.title}
-              titleImage={item.imageUrl}
-              author={item.author ?? ""}
-              publishYear={item.publishYear ?? ""}
-              genre={item.genre}
-              buttonLabel="Remove from pile"
-              onImageClick={() =>
-                handleImageClick(item.externalId, item.openLibraryKey)
-              }
-              onAction={() =>
-                deleteItem("books", item.id!).then(() => {
-                  getItems("books").then(setPile);
-                  notifications.show({
-                    title: "Removed from pile",
-                    message: `${item.title} was removed`,
-                    color: "gray",
-                  });
-                })
-              }
-            />
-          ))}
-        </SimpleGrid>
+    <CategoryPage<BookPileItem>
+      category="books"
+      title="Books"
+      emptyMessage="Nothing here yet — hit the + button to add your first book."
+      refreshPile={refreshPile}
+      renderCard={(item, onImageClick, onRemove) => (
+        <BookCard
+          key={item.id}
+          title={item.title}
+          titleImage={item.imageUrl}
+          author={item.author ?? ""}
+          publishYear={item.publishYear ?? ""}
+          genre={item.genre}
+          buttonLabel="Remove from pile"
+          onImageClick={() =>
+            onImageClick(item.externalId, item.openLibraryKey)
+          }
+          onAction={onRemove}
+        />
       )}
-      <DetailModal
-        opened={detailOpened}
-        onClose={closeDetail}
-        category="books"
-        externalId={selectedId}
-        openLibraryKey={selectedKey}
-        onAction={() => {
-          const item = pile.find((i) => i.externalId === selectedId);
-          if (item)
-            deleteItem("books", item.id!).then(() => {
-              getItems("books").then(setPile);
-              closeDetail();
-            });
-        }}
-        actionLabel="Remove from pile"
-      />
-    </Stack>
+    />
   );
 }

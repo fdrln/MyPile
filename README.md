@@ -107,7 +107,5 @@ mypile/
 
 - Status tracking (want / finished) not yet implemented
 - Search function
-- Some code repeats itself through multiple files
-- Some files have too much going on and should be seperated
 
 ---
