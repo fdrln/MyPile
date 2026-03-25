@@ -7,7 +7,7 @@ export interface PileItem {
   externalId: number;
   title: string;
   imageUrl: string;
-  genre: number | string;
+  genre: string;
   rating?: number;
   overview: string;
   addedAt?: string;

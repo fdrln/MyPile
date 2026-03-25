@@ -7,7 +7,7 @@ interface MovieCardProps {
   title: string;
   titleImage: string;
   releaseDate: string;
-  genre: number | string;
+  genre: string;
   rating?: number;
   overview: string;
   onAction: () => void;
@@ -15,11 +15,8 @@ interface MovieCardProps {
   buttonLabel?: string;
 }
 
-function resolveGenre(
-  genre: number | string,
-  genres: Record<number, string>,
-): string {
-  if (typeof genre === "string" && isNaN(Number(genre))) return genre;
+function resolveGenre(genre: string, genres: Record<number, string>): string {
+  if (isNaN(Number(genre))) return genre;
   return genres[Number(genre)] ?? "Unknown";
 }
 

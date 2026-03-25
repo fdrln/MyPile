@@ -2,7 +2,7 @@
 
 A personal backlog tracker for movies, TV shows, games and books.
 
-> Built as a learning project to explore React, REST APIs and full-stack development. It's still a WIP, there's some repeated code as well as some bandaid fixes that I'd like to replace.
+> Built as a learning project to explore React, REST APIs and full-stack development. Still a WIP.
 
 Intended for single-user self-hosting.
 
@@ -95,9 +95,10 @@ mypile/
 └── backend/           # Spring Boot API
     └── src/main/java/com/mypile/backend/
         ├── controller/    # REST endpoints
+        ├── dto/           # Data Transfer Objects
         ├── entities/      # JPA entities
         ├── repository/    # Spring Data repositories
-        ├── service/       # Business logic
+        ├── service/       # Business logic and API integration
         └── config/        # App configuration
 ```
 

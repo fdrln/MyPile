@@ -6,7 +6,7 @@ interface BookCardProps {
   titleImage: string;
   author: string;
   publishYear: string;
-  genre: number | string;
+  genre: string;
   onAction: () => void;
   onImageClick?: () => void;
   buttonLabel?: string;

@@ -6,7 +6,7 @@ interface GameCardProps {
   title: string;
   titleImage: string;
   releaseDate: string;
-  genre: number | string;
+  genre: string;
   rating?: number;
   overview: string;
   onAction: () => void;
