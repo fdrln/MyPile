@@ -43,7 +43,11 @@ export async function addItem(category: string, item: PileItem) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(item),
   });
-  return await res.json();
+
+  if (res.status === 409) {
+    return null;
+  }
+  return res.json();
 }
 
 export async function deleteItem(category: string, id: number) {

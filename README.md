@@ -103,7 +103,6 @@ mypile/
 
 ## Issues / Planned
 
-- No duplicate prevention yet
 - Status tracking (want / finished) not yet implemented
 - Search function
 - Some code repeats itself through multiple files
