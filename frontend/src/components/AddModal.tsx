@@ -16,15 +16,9 @@ import { useDisclosure } from "@mantine/hooks";
 import { ACCENT_COLOR } from "../constants/theme";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { useMediaSearch } from "../hooks/useMediaSearch";
-import MovieCard from "./MovieCard";
+import SearchCard from "./SearchCard";
 import DetailModal from "./DetailModal";
-import {
-  addItem,
-  type MoviePileItem,
-  type TVPileItem,
-  type GamePileItem,
-  type BookPileItem,
-} from "../services/pileService";
+import { addItem, buildPileItem } from "../services/pileService";
 import type { MediaSearchResult } from "../types/MediaSearchResult";
 import { notifications } from "@mantine/notifications";
 
@@ -32,41 +26,6 @@ interface AddModalProps {
   opened: boolean;
   onClose: () => void;
   onItemAdded: () => void;
-}
-
-function buildPileItem(
-  result: MediaSearchResult,
-  category: CategoryId,
-): MoviePileItem | TVPileItem | GamePileItem | BookPileItem {
-  const base = {
-    externalId: result.id,
-    title: result.title,
-    imageUrl: result.titleImage,
-    genre: result.genre,
-    rating: result.rating,
-    overview: result.overview,
-  };
-
-  switch (category) {
-    case "tv":
-      return { ...base, firstAirDate: result.releaseDate } as TVPileItem;
-    case "games":
-      return {
-        ...base,
-        releaseDate: result.releaseDate,
-        metacritic: result.metacritic ?? null,
-        platforms: result.overview,
-      } as GamePileItem;
-    case "books":
-      return {
-        ...base,
-        author: result.overview,
-        publishYear: result.releaseDate,
-        openLibraryKey: result.openLibraryKey,
-      } as BookPileItem;
-    default:
-      return { ...base, releaseDate: result.releaseDate } as MoviePileItem;
-  }
 }
 
 export default function AddModal({
@@ -183,14 +142,10 @@ export default function AddModal({
             ) : (
               <SimpleGrid cols={{ base: 1, sm: 2, lg: 5 }}>
                 {results.map((result) => (
-                  <MovieCard
+                  <SearchCard
                     key={result.id}
-                    title={result.title}
-                    titleImage={result.titleImage}
-                    releaseDate={result.releaseDate}
-                    genre={result.genre}
-                    rating={result.rating}
-                    overview={result.overview}
+                    result={result}
+                    category={selectedCategory}
                     onImageClick={() => handleImageClick(result)}
                     onAction={() => handleAdd(result)}
                   />
