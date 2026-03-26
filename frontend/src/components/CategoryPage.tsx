@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Stack, SimpleGrid, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { getItems, deleteItem } from "../services/pileService";
+import type { CategoryId } from "../constants/categories";
+import { usePileItems } from "../hooks/usePileItems";
 import PageHeader from "./PageHeader";
 import DetailModal from "./DetailModal";
-import { notifications } from "@mantine/notifications";
 
 interface CategoryPageProps<T> {
-  category: "movies" | "tv" | "games" | "books";
+  category: CategoryId;
   title: string;
   emptyMessage: string;
   refreshPile: number;
@@ -34,32 +34,16 @@ export default function CategoryPage<T extends BaseItem>({
   footer,
   renderCard,
 }: CategoryPageProps<T>) {
-  const [pile, setPile] = useState<T[]>([]);
+  const { pile, removeItem } = usePileItems<T>(category, refreshPile);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [selectedKey, setSelectedKey] = useState<string | undefined>(undefined);
   const [detailOpened, { open: openDetail, close: closeDetail }] =
     useDisclosure(false);
 
-  useEffect(() => {
-    getItems(category).then((data) => setPile(data));
-  }, [category, refreshPile]);
-
   const handleImageClick = (id: number, key?: string) => {
     setSelectedId(id);
     setSelectedKey(key);
     openDetail();
-  };
-
-  const handleRemove = (item: T) => {
-    if (!item.id) return;
-    deleteItem(category, item.id).then(() => {
-      getItems(category).then(setPile);
-      notifications.show({
-        title: "Removed from pile",
-        message: `${item.title} was removed`,
-        color: "gray",
-      });
-    });
   };
 
   return (
@@ -76,7 +60,7 @@ export default function CategoryPage<T extends BaseItem>({
             renderCard(
               item,
               (id, key) => handleImageClick(id, key),
-              () => handleRemove(item),
+              () => removeItem(item),
             ),
           )}
         </SimpleGrid>
@@ -94,10 +78,8 @@ export default function CategoryPage<T extends BaseItem>({
         onAction={() => {
           const item = pile.find((i) => i.externalId === selectedId);
           if (item && item.id) {
-            deleteItem(category, item.id).then(() => {
-              getItems(category).then(setPile);
-              closeDetail();
-            });
+            removeItem(item);
+            closeDetail();
           }
         }}
       />
