@@ -17,7 +17,7 @@ export function useMediaSearch(
     }
 
     const url = searchQuery
-      ? `${BACKEND_BASE}/search/${category}?q=${searchQuery}`
+      ? `${BACKEND_BASE}/search/${category}?q=${encodeURIComponent(searchQuery)}`
       : `${BACKEND_BASE}/search/${category}`;
 
     const timeout = setTimeout(

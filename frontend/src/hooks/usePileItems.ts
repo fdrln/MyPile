@@ -26,6 +26,12 @@ export function usePileItems<T extends BaseItem>(
         message: `${item.title} was removed`,
         color: "gray",
       });
+    }).catch(() => {
+      notifications.show({
+        title: "Failed to remove",
+        message: `${item.title} could not be removed`,
+        color: "red",
+      });
     });
   };
 
